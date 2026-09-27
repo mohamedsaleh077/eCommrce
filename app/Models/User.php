@@ -14,8 +14,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Models\Role;
 use App\Models\Order;
+use App\Models\Receipt;
 
-#[Fillable(['name', 'email', 'password'])]
+#[Fillable(['role_id', 'name', 'email', 'password', 'address'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
@@ -40,8 +41,8 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class);
     }
 
-    public function orders(): HasMany
+    public function receipts(): HasMany
     {
-        return $this->hasMany(Order::class);
+        return $this->hasMany(Receipt::class);
     }
 }

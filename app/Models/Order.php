@@ -4,17 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use App\Models\User;
+use App\Models\Receipts;
 use App\Models\Product;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Order extends Model
 {
-    public function user(): BelongsTo
+    public function receipts(): HasMany
     {
-        return $this->belongsTo(User::class);
-    }
-
-    public function product() : BelongsTo {
-        return $this->belongsTo(Product::class);
+        return $this->hasMany(Receipt::class);
     }
 }
