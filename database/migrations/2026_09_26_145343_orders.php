@@ -13,10 +13,16 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
-            $table->foreignId('product_id')->constrained('products')->noActionOnDelete();
             $table->dateTime('estimated_time');
             $table->dateTime('arrived_at');
+            $table->timestamps();
+        });
+
+        Schema::create('receipts', function(Blueprint $table){
+            $table->foreignId('order_id')->constrained('orders')->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('product_id')->constrained('products')->cascadeOnDelete();
+            $table->integer('amount');
             $table->timestamps();
         });
     }
