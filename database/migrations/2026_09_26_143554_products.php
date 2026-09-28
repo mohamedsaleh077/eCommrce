@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('categories', function(Blueprint $table){
             $table->id();
             $table->string('category');
+            $table->timestamps();
         });
             
         Schema::create('products', function (Blueprint $table) {
@@ -21,7 +22,6 @@ return new class extends Migration
             $table->foreignId('category_id')->constrained('categories')->cascadeOnDelete();
             $table->string('name');
             $table->text('description')->nullable();
-            $table->foreignId('image_id')->nullable()->constrained('uploads')->nullOnDelete();
             $table->float('price');
             $table->float('discount')->nullable();
             $table->dateTime('discount_end')->nullable();

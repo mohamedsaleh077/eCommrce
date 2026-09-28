@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('uploads', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('product_id')->nullable()->constrained('products')->cascadeOnDelete();
             $table->string('filename');
             $table->string('description')->nullable();
             $table->timestamps();
