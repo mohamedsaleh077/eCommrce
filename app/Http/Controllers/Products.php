@@ -28,6 +28,24 @@ class Products extends Controller
     }
 
     /**
+     * Display a listing of the resource. list all products whatever the stock
+     */
+    public function allProducts()
+    {
+        $products = Product::with('category', 'upload')->get();
+
+        if($products->isEmpty()){
+            return response()->json([
+                'message' => 'no Products have been found, create one in admin dashboard'
+            ], 404);
+        }
+
+        return response()->json([
+            'products' => $products
+        ]);
+    }
+
+    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
