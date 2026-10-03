@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-#[Fillable(['filename', 'description'])]
+#[Fillable(['product_id', 'filename', 'description'])]
 #[Hidden([])]
 class Upload extends Model
 {
