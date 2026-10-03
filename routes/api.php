@@ -9,6 +9,7 @@ use App\Http\Controllers\Categories;
 use App\Http\Middleware\IsAdmin;
 use App\Http\Middleware\UserAuth;
 use App\Http\Controllers\Products;
+use App\Http\Controllers\Admin\Uploads;
 
 // Route::get('/user', function (Request $request) {
 //     return $request->user();
@@ -23,8 +24,16 @@ Route::middleware([UserAuth::class, IsAdmin::class])
 
         // product management
         Route::post('/product', [Products::class, 'store']);
+        Route::get('/product/all', [Products::class, 'allProducts']);
         Route::put('/product/{id}', [Products::class, 'update']);
         Route::delete('/product/{id}', [Products::class, 'destroy']);
+
+        // uploads management
+        Route::get('/upload', [Uploads::class, 'index']);
+        Route::get('/upload/{id}', [Uploads::class, 'show']);
+        Route::post('/upload', [Uploads::class, 'store']);
+        Route::put('/upload/{id}', [Uploads::class, 'update']);
+        Route::delete('/upload/{id}', [Uploads::class, 'destroy']);
     });
 
 Route::middleware([])->group(function(){
@@ -39,6 +48,8 @@ Route::middleware([])->group(function(){
     // Products
     Route::get('/product', [Products::class, 'index']);
     Route::get('/product/{id}', [Products::class, 'show']);
+    Route::get('/product/image/{id}', [Uploads::class, 'getImage']);
+
 });
 
 Route::middleware(UserAuth::class)->group(function(){
