@@ -35,6 +35,10 @@ class UserAuth
             ], 403);
         }
 
+        if (!$tokenInstance->tokenable->hasVerifiedEmail()) {
+            return response()->json(['message' => 'verify your email'], 403);
+        }
+
         return $next($request);
     }
 }
