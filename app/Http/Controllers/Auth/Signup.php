@@ -39,6 +39,7 @@ class Signup extends Controller
 
         return response()->json([
             'message' => "user {$user->name} have registered successfully! Verify your email.",
+            'profile' => $user,
             'access_token' => $token,
             'token_type'   => 'bearer'
             ], 200);
