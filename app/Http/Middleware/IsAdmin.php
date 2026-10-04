@@ -29,6 +29,7 @@ class IsAdmin
             ], 401);
         }
 
+        $request->merge(['isAdmin' => true]);
         return $next($request);
     }
 }
