@@ -30,3 +30,9 @@ Thumbs.db
 # Laravel IDE Helper
 _ide_helper_models.php
 .phpstorm.meta.php
+.openpost/collections.json
+.openpost/config.json
+.gitignore
+.openpost/session.json
+.openpost/history.json
+.openpost/snapshots.json
