@@ -10,6 +10,8 @@ use App\Http\Middleware\IsAdmin;
 use App\Http\Middleware\UserAuth;
 use App\Http\Controllers\Products;
 use App\Http\Controllers\Admin\Uploads;
+use App\Http\Controllers\OrderController;
+use App\Http\Middleware\isVerified;
 
 // Route::get('/user', function (Request $request) {
 //     return $request->user();
@@ -34,6 +36,11 @@ Route::middleware([UserAuth::class, IsAdmin::class])
         Route::post('/upload', [Uploads::class, 'store']);
         Route::put('/upload/{id}', [Uploads::class, 'update']);
         Route::delete('/upload/{id}', [Uploads::class, 'destroy']);
+
+        // update order
+        Route::put('/order/{id}', [OrderController::class, 'update']);
+        Route::delete('/order/{id}', [OrderController::class, 'destroy']);
+
     });
 
 Route::middleware([])->group(function(){
@@ -51,8 +58,13 @@ Route::middleware([])->group(function(){
     Route::get('/product/image/{id}', [Uploads::class, 'getImage']);
 
 });
-
-Route::middleware(UserAuth::class)->group(function(){
-    Route::post('/email/verify', [VerifyMail::class, 'verify']);
+   
+Route::middleware(isVerified::class)->group(function(){
     Route::post('/email/code', [VerifyMail::class, 'getNewCode']);
+    Route::post('/email/verify', [VerifyMail::class, 'verify']);
+});
+Route::middleware(UserAuth::class)->group(function(){
+    // place an order
+    Route::post('/order/', [OrderController::class, 'store']);
+    Route::get('/order/', [OrderController::class, 'index']);
 });
