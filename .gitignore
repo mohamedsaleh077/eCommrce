@@ -36,3 +36,8 @@ _ide_helper_models.php
 .openpost/session.json
 .openpost/history.json
 .openpost/snapshots.json
+eCommerce/bruno.json
+.gitignore
+eCommerce/collection.bru
+.gitignore
+eCommerce/environments/d.bru
