@@ -3,22 +3,21 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-
+use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Attributes\Hidden;
+#[Fillable(['order_id', 'product_id', 'amount', 'created_at'])]
+#[Hidden([])]
 class Receipt extends Model
 {
-    public function user(): BelongsToMany
+    public function order(): BelongsTo
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsTo(Order::class);
     }
 
-    public function order(): BelongsToMany
+    public function product(): BelongsTo
     {
-        return $this->belongsToMany(Order::class);
-    }
-
-    public function product(): BelongsToMany
-    {
-        return $this->belongsToMany(Product::class);
+        return $this->belongsTo(Product::class);
     }
 }
