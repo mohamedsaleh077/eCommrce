@@ -73,7 +73,7 @@ class Products extends Controller
      */
     public function show(string $id)
     {
-        $product = Product::with('category')->find($id);
+        $product = Product::with('category', 'upload')->find($id);
 
         if(!$product){
             return response()->json([
